@@ -176,13 +176,13 @@
       </div>
       <div class="col-md-3">
         
-        <a href="" data-toggle="popover" title="Coming Soon!" data-content="We are hard at work!" onclick="trackOutboundLink('outbound', 'http://www.applestore.com'); return false;"><img src="img/appstore.svg" width="180" alt=""></a>
+        <a href="" data-toggle="popover" title="Coming Soon!" data-content="We are hard at work!" onclick="trackOutboundLinkApp('outbound', 'iphone', 'https://itunes.apple.com/us/app/savage-squad/id1441512537?mt=8'); return false;"><img src="img/appstore.svg" width="180" alt=""></a>
         
       </div>
     
       <div class="col-md-3">
         
-        <a href="" data-toggle="popover" title="Coming Soon!" data-content="We are hard at work!" onclick="trackOutboundLink('outbound', 'http://www.playstore.com'); return false;"><img src="img/playstore.png" width="180" alt=""></a>
+        <a href="" onclick="trackOutboundLinkApp('outbound', 'android', 'https://play.google.com/store/apps/details?id=com.focus.teamwork'); return false;"><img src="img/playstore.png" width="180" alt=""></a>
         
       </div>
 
@@ -195,7 +195,7 @@
   <div id="copyrights">
     <div class="container">
       <p>
-        SAVAGE SQUAD
+        | SAVAGE SQUAD | <a href = "privacy.html">PRIVACY |</a>
       </p>
       <div class="credits">
         
@@ -250,7 +250,33 @@
       'event_category': category,
       'event_label': label,
       'transport_type': 'beacon',
-      'event_callback': function(){console.log("clicked: " + category + " " + label) /*document.location = url;*/}
+      'event_callback': function(){/*document.location = url;*/}
+      //'event_callback': function(){document.location = url;}
+    });
+  }
+
+  var trackOutboundLinkApp = function(category, label, url) {
+
+    if(label == 'email')
+    {
+      label = $('#exampleInputEmail1').val();
+    }
+
+    if(label == 'email2')
+    {
+      label = $('#exampleInputEmail2').val();
+    }
+
+    gtag('event', 'click', {
+      'event_category': category,
+      'event_label': label,
+      'transport_type': 'beacon',
+      'event_callback': function(){
+      	if(url != '')
+      	{
+      document.location = url;
+  }
+  		}
       //'event_callback': function(){document.location = url;}
     });
   }
